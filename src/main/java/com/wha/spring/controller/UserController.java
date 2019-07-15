@@ -39,7 +39,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(resultat, HttpStatus.OK);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/create")
 	public User createUser(@RequestBody User user) {
 		User newUser = userService.saveUser(user);

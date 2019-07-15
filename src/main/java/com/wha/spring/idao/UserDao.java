@@ -1,6 +1,7 @@
 package com.wha.spring.idao;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import com.wha.spring.model.User;

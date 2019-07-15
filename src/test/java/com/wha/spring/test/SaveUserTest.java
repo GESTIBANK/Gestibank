@@ -1,6 +1,7 @@
 package com.wha.spring.test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;

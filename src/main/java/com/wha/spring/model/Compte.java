@@ -53,3 +53,4 @@ public class Compte implements Serializable{
 	@OneToMany(mappedBy="compte")
 	private List<Notification> notifications;
 }
+

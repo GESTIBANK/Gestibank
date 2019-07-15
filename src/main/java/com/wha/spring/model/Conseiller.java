@@ -28,7 +28,7 @@ private int matricule;
 
 private List<Client> listeClients;
 private List<DemandeClient> listeDemandeClient;
-private List<DomandeOuverture> listeDemandeOuvertureAValider;
+private List<DemandeOuverture> listeDemandeOuvertureAValider;
 
 
 

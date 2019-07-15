@@ -42,9 +42,14 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	/**@Override
 	public void creationAdmin(User user) {
 		adminDAO.creationAdmin(user);
+	}**/
+	@Override
+	public void creationAdmin(Admin administrateur) {
+		adminDAO.creationAdmin(administrateur);
+		
 	}
 	
 	

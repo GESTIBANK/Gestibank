@@ -6,12 +6,19 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "DemandeClient")
 public class DemandeClient implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne()
+	private Conseiller conseiller;
+	
+	@ManyToOne()
+	private Client client;
 		
 	@EmbeddedId
 	private DemandeClientPK idDemenande; 
@@ -19,8 +26,8 @@ public class DemandeClient implements Serializable{
 	@Column(name = "MESSAGE", nullable = false)
     private String message;
 	
-	@Column(name = "TYPEREQUETE", nullable = false)
+	/**@Column(name = "TYPEREQUETE", nullable = false)
 	@Enumerated(EnumType.STRING)
-    private Typerequete typeRequete;
+    private Typerequete typeRequete;**/
 
 }

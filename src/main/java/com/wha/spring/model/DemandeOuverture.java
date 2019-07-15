@@ -1,17 +1,32 @@
 package com.wha.spring.model;
 
+import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-
+@Entity
 @Getter
 @Setter
-public class DemandeOuverture {
+@Table(name = "DemandeOuverture")
+public class DemandeOuverture implements Serializable{
 	
-	ClientPotentiel clienpotentiel;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@OneToOne(mappedBy = "demandeOuverture")
+	private ClientPotentiel clienpotentiel;
 	boolean valide;
-	Conseiller conseiller;
+	@ManyToOne()
+	private Conseiller conseiller;
 	
 	public DemandeOuverture(ClientPotentiel clientpotentiel){
 		

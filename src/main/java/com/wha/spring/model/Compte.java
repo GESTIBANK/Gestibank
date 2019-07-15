@@ -27,6 +27,9 @@ public class Compte implements Serializable{
 	@Column(name="numero_compte")
 	private int numeroCompte;
 
+	@ManyToOne()
+	private Client client;
+	
 	@Column(name="rib")
 	private int rib;
 	

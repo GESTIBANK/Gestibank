@@ -52,6 +52,8 @@ public class Compte implements Serializable{
 	@Column(name="montant_remuneration")
 	private String typeCompte;
 	
+	@Column(name="gele")
+	private Boolean gele;
 	
 	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Notification> notifications;

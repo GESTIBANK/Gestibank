@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.ClientPotentiel;
+import com.wha.spring.model.Compte;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
 
@@ -34,6 +36,9 @@ public class UserController {
 	@Autowired
 	DemandeOuvertureDAO demandeOuvertureDAO;
 
+	@Autowired
+	ConseillerDao conseillerDao;
+	
 	@Autowired
 	AdminService adminService;
 	
@@ -73,4 +78,14 @@ public class UserController {
 		clientPService.addClientP(clientp);
 		return clientp;
 	}
+	
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/modificationDecouvert", method = RequestMethod.GET)
+	public void  modificationDecouvert() {
+		Compte cp = new Compte();
+		conseillerDao.modificationDecouvert(cp, 500);
+		
+	}
+	
+	
 }

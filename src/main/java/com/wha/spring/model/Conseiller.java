@@ -35,6 +35,9 @@ private List<Client> listeClients;
 @ManyToOne()
 private Admin admin;
 
+/*@Column(unique=true, nullable=true)
+private List<DemandeOuverture> demandeOuvertureAValider;*/
+
 
 
 }

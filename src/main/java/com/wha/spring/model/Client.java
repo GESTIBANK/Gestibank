@@ -46,16 +46,16 @@ public class Client extends User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 
-	@Column(unique=true, nullable=false)
+	@Column(unique=true, nullable=true)
 	private int identifiant;
 
 	@OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Compte> comptes;
 	
-	@Column(name = "REVENUMENS", nullable = false)
+	@Column(name = "REVENUMENS", nullable = true)
 	private double revenuMens;
 	
-	@Column(name = "PIECESJUSTIF", nullable = false)
+	@Column(name = "PIECESJUSTIF", nullable = true)
 	private boolean piecesJustif;
 	
 	@ManyToOne()

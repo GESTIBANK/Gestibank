@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wha.spring.idao.DemandeOuvertureDAO;
+import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.UserService;
+import com.wha.spring.model.Admin;
 import com.wha.spring.model.ClientPotentiel;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
@@ -32,16 +34,13 @@ public class UserController {
 	@Autowired
 	DemandeOuvertureDAO demandeOuvertureDAO;
 
+	@Autowired
+	AdminService adminService;
+	
 	@RequestMapping(value = "/create/dummy", method = RequestMethod.GET)
 	public void dummy() {
-		// User u1 = new User(0, "Jemal Ahmed", "Ahmed.Jemal",
-		// "jmlhmd@gmail.com");
-		// User u2 = new User(0, "Leanne Graham", "Bret", "Sincere@april.biz");
-		// User u3 = new User(0, "Clementina DuBuque", "Moriah.Stanton",
-		// "Rey.Padberg@karina.biz");
-		// userService.saveUser(u1);
-		// userService.saveUser(u2);
-		// userService.saveUser(u3);
+		 Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
+		 adminService.createAdmin(admin);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -66,7 +65,7 @@ public class UserController {
 	}
 
 	// @CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/clientPotentiel")
+	@PostMapping("/createCompte")
 	public ClientPotentiel clientPotentiel(@RequestBody ClientPotentiel clientp) {
 		DemandeOuverture d = demandeOuvertureDAO.createDemandeOuverture();
 		System.out.println(d);

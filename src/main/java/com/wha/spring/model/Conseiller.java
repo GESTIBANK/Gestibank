@@ -27,7 +27,7 @@ import lombok.Setter;
 @DiscriminatorValue("Conseiller")
 public class Conseiller extends User implements Serializable{
 
-@Column(unique=true, nullable=false)
+@Column(unique=true, nullable=true)
 private int matricule;
 
 @OneToMany(mappedBy = "conseiller")

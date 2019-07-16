@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,12 +20,22 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("Admin")
-public class Admin extends User implements Serializable{
-	
-	
-	@OneToMany(mappedBy="admin", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+public class Admin extends User implements Serializable {
+
+	@OneToMany(mappedBy = "admin", cascade = { CascadeType.PERSIST,
+			CascadeType.REMOVE })
 	private List<Conseiller> listeConseillers;
-	@OneToMany(mappedBy="admin")
+	@OneToMany(mappedBy = "admin")
 	private List<DemandeOuverture> listeDemandeOuverture;
+
+	@Builder
+	public Admin(int id, String nom, String prenome, String email,
+			String adresse, String telephone, String pseudo, String mdp,
+			List<Conseiller> listeConseillers,
+			List<DemandeOuverture> listeDemandeOuverture) {
+		super(id, nom, prenome, email, adresse, telephone, pseudo, mdp);
+		this.listeConseillers = listeConseillers;
+		this.listeDemandeOuverture = listeDemandeOuverture;
+	}
 
 }

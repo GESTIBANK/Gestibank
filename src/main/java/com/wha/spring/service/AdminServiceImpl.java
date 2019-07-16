@@ -15,15 +15,30 @@ import com.wha.spring.model.DemandeOuverture;
 
 @Service("adminService")
 @Transactional
-public class AdminServiceImpl {
+public class AdminServiceImpl implements AdminService{
+	@Autowired
+	AdminDao adminDAO;
+	public void createAdmin(Admin admin){
+		adminDAO.creationAdmin(admin);
+	}
+	
 	
 	/*@Autowired
-	AdminDao adminDAO;*/
+	AdminDao adminDAO;
+	@Autowired
+	UserDao conseillerDAO;*/
 	
 	/*@Override
 	public Conseiller creationConseiller() {
-		// TODO Auto-generated method stub
-		return null;
+		Conseiller conseiller = new Conseiller();
+		conseiller.setNom(user.getNom());
+		conseiller.setPrenom(user.getPrenom());
+		conseiller.setEmail(user.getEmail());
+		conseiller.setAdresse(user.getAdresse());
+		conseiller.setTelephone(user.getTelephone());
+		conseiller.setPseudo(user.getPseudo());
+		conseiller.setMdp(user.getMdp());
+		return conseiller;
 	}
 	@Override
 	public void supprimerConseiller(Conseiller conseiller) {

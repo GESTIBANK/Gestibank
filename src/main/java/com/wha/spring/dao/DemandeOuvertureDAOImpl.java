@@ -1,5 +1,7 @@
 package com.wha.spring.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +20,11 @@ public class DemandeOuvertureDAOImpl extends AbstractDao implements DemandeOuver
 		
 		
 		
+	}
+
+	@Override
+	public List<DemandeOuverture> getDemandeOuverture() {
+	return em.createQuery("From DemandeOuverture").getResultList();
 	}
 
 }

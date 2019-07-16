@@ -39,8 +39,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/create/dummy", method = RequestMethod.GET)
 	public void dummy() {
-		 Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
-		 adminService.createAdmin(admin);
+		 /*Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
+		 adminService.createAdmin(admin);*/
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -73,4 +73,14 @@ public class UserController {
 		clientPService.addClientP(clientp);
 		return clientp;
 	}
+	
+	
+	/*@RequestMapping(value= "/demandeOuvertureCompte",  method = RequestMethod.GET)
+	public ClientPotentiel clientPotentiel(@RequestBody ClientPotentiel clientp) {
+		DemandeOuverture d = demandeOuvertureDAO.createDemandeOuverture();
+		System.out.println(d);
+		clientp.setDemandeOuverture(d);
+		clientPService.addClientP(clientp);
+		return clientp;
+	}*/
 }

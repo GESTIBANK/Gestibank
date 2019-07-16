@@ -1,12 +1,17 @@
 package com.wha.spring.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wha.spring.idao.AdminDao;
+import com.wha.spring.idao.ConseillerDao;
+import com.wha.spring.idao.DemandeOuvertureDAO;
+import com.wha.spring.idao.UserDao;
 import com.wha.spring.iservice.AdminService;
-
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Conseiller;
@@ -22,51 +27,42 @@ public class AdminServiceImpl implements AdminService{
 		adminDAO.creationAdmin(admin);
 	}
 	
-	
-	/*@Autowired
-	AdminDao adminDAO;
 	@Autowired
-	UserDao conseillerDAO;*/
+	ConseillerDao conseillerDAO;
+	@Autowired
+	DemandeOuvertureDAO demandeOuvertureDao;
 	
-	/*@Override
-	public Conseiller creationConseiller() {
-		Conseiller conseiller = new Conseiller();
-		conseiller.setNom(user.getNom());
-		conseiller.setPrenom(user.getPrenom());
-		conseiller.setEmail(user.getEmail());
-		conseiller.setAdresse(user.getAdresse());
-		conseiller.setTelephone(user.getTelephone());
-		conseiller.setPseudo(user.getPseudo());
-		conseiller.setMdp(user.getMdp());
+	@Override
+	public Conseiller creationConseiller(int id) {
+		Conseiller conseiller = (Conseiller) conseillerDAO.findById(id);
 		return conseiller;
 	}
 	@Override
 	public void supprimerConseiller(Conseiller conseiller) {
-		// TODO Auto-generated method stub
+		
+		conseillerDAO.deleteUser(conseiller.getId());
 		
 	}
 	@Override
 	public void reaffectationClient(Client client, Conseiller conseiller) {
-		// TODO Auto-generated method stub
+		
+		List<Client> listeClients = new ArrayList<Client>();
+		listeClients = conseiller.getListeClients();
+		listeClients.add(client);
+		conseiller.setListeClients(listeClients);
+		conseillerDAO.saveUser(conseiller);
 		
 	}
 	@Override
-	public void affectationDemandeOuverture(DemandeOuverture demande,
-			Conseiller conseiller) {
-		// TODO Auto-generated method stub
+	public void affectationDemandeOuverture(Conseiller conseiller) {
+		
+		List<DemandeOuverture> nouvelleListeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
+		List<DemandeOuverture> listeDemandesOuverture = conseiller.getDemandeOuvertureAValider();
+		listeDemandesOuverture.addAll(nouvelleListeDemandesOuverture);
+		conseiller.setDemandeOuvertureAValider(listeDemandesOuverture);
+		conseillerDAO.saveUser(conseiller);
 		
 	}
-	/**@Override
-	public void creationAdmin(User user) {
-		adminDAO.creationAdmin(user);
-	}
-	@Override
-	public void creationAdmin(Admin administrateur) {
-		adminDAO.creationAdmin(administrateur);
-		
-	}**/
-	
-	
     
 
 }

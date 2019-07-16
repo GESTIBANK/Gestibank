@@ -21,6 +21,10 @@ import com.wha.spring.model.DemandeOuverture;
 @Service("adminService")
 @Transactional
 public class AdminServiceImpl implements AdminService{
+	
+
+	
+	
 	@Autowired
 	AdminDao adminDAO;
 	public void createAdmin(Admin admin){
@@ -30,11 +34,12 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	ConseillerDao conseillerDAO;
 	@Autowired
-	DemandeOuvertureDAO demandeOuvertureDao;
+	DemandeOuvertureDAO demandeOuvertureDao;  
 	
 	@Override
-	public Conseiller creationConseiller(int id) {
-		Conseiller conseiller = (Conseiller) conseillerDAO.findById(id);
+	public Conseiller creationConseiller(Conseiller conseiller) {
+		
+		adminDAO.creationConseiller(conseiller);
 		return conseiller;
 	}
 	@Override
@@ -50,17 +55,17 @@ public class AdminServiceImpl implements AdminService{
 		listeClients = conseiller.getListeClients();
 		listeClients.add(client);
 		conseiller.setListeClients(listeClients);
-		conseillerDAO.saveUser(conseiller);
+		//conseillerDAO.saveUser(conseiller);
 		
 	}
 	@Override
-	public void affectationDemandeOuverture(Conseiller conseiller) {
+	public void affectationDemandeOuverture(DemandeOuverture demandeOuverture, Conseiller conseiller ) {
 		
-		List<DemandeOuverture> nouvelleListeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
-		List<DemandeOuverture> listeDemandesOuverture = conseiller.getDemandeOuvertureAValider();
-		listeDemandesOuverture.addAll(nouvelleListeDemandesOuverture);
-		conseiller.setDemandeOuvertureAValider(listeDemandesOuverture);
-		conseillerDAO.saveUser(conseiller);
+		//List<DemandeOuverture> nouvelleListeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
+		//List<DemandeOuverture> listeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
+		//listeDemandesOuverture.addAll(nouvelleListeDemandesOuverture);
+		conseiller.setDemandeOuverture(demandeOuverture);
+		
 		
 	}
     

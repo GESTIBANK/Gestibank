@@ -27,8 +27,8 @@ public class ClientPotentiel {
 	@OneToOne()
 	private DemandeOuverture demandeOuverture;
 	
-	private String name;
-	private String username;
+	private String nom;
+	private String prenome;
 	private String email;
 	private int revenuMens;
 	private File[] piecesJustif;

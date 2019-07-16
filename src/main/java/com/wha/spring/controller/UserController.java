@@ -13,15 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wha.spring.idao.ClientDao;
 import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.CompteService;
+import com.wha.spring.iservice.ConseillerService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
+import com.wha.spring.model.Client;
 import com.wha.spring.model.ClientPotentiel;
 import com.wha.spring.model.Compte;
+import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
 
@@ -42,21 +46,28 @@ public class UserController {
 	ConseillerDao conseillerDao;
 	
 	@Autowired
+	ConseillerService conseillerService;
+	
+	@Autowired
+	ClientDao clientDao;
+	
+	@Autowired
 	AdminService adminService;
 	
 	@Autowired
 	CompteService compteService;
 	
-	@RequestMapping(value = "/create/dummy", method = RequestMethod.GET)
+	@RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
 	public void dummy() {
-		 /*Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
-		 adminService.createAdmin(admin);*/
+		 Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
+		 adminService.createAdmin(admin);
 	}
 	
-	@RequestMapping(value = "/create/dummyaccount", method = RequestMethod.GET)
-	public void dummyAccount() {
+	@RequestMapping(value = "/createCompte", method = RequestMethod.GET)
+	public Compte dummyAccount() {
 		 Compte compte = new Compte(0, null, 100, 122, 10223, 200,8,"cheque",false);
 		 compteService.createCompte(compte);
+		 return compte;
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -72,7 +83,7 @@ public class UserController {
 		User newUser = userService.saveUser(user);
 		return newUser;
 	}
-
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/update")
 	public User updateUser(@RequestBody User user) {
@@ -81,25 +92,15 @@ public class UserController {
 	}
 
 	// @CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/createCompte")
-	public ClientPotentiel clientPotentiel(@RequestBody ClientPotentiel clientp) {
+	@PostMapping("/demandeOuvertureCompte")
+	public DemandeOuverture demandeOuvertureCompte(@RequestBody ClientPotentiel clientp) {
 		DemandeOuverture d = demandeOuvertureDAO.createDemandeOuverture();
 		System.out.println(d);
 		clientp.setDemandeOuverture(d);
 		clientPService.addClientP(clientp);
-		return clientp;
+		return d;
 	}
-	
 
-	
-	/*@RequestMapping(value= "/demandeOuvertureCompte",  method = RequestMethod.GET)
-	public ClientPotentiel clientPotentiel(@RequestBody ClientPotentiel clientp) {
-		DemandeOuverture d = demandeOuvertureDAO.createDemandeOuverture();
-		System.out.println(d);
-		clientp.setDemandeOuverture(d);
-		clientPService.addClientP(clientp);
-		return clientp;
-	}*/
 
 	//@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/modificationDecouvert", method = RequestMethod.GET)
@@ -108,6 +109,21 @@ public class UserController {
 		conseillerDao.modificationDecouvert(cp, 500);
 		
 	}
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping(value = "/createConseiller")
+	public Conseiller createConseiller(@RequestBody Conseiller conseiller) {
+		adminService.creationConseiller(conseiller);
+		return conseiller;
+		
+	}
+	
+	//@CrossOrigin(origins = "http://localhost:4200")
+		@PostMapping(value = "/createClient")
+		public Client createClient(@RequestBody DemandeOuverture demandeOuverture) {
+			
+			return clientDao.creationClient(conseillerService.validationDemandeOuverture(demandeOuverture));
+			
+		}
 	
 	
 

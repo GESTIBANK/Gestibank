@@ -1,6 +1,7 @@
 package com.wha.spring.model;
 
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,6 +41,26 @@ import lombok.Setter;*/
 @AllArgsConstructor
 @DiscriminatorValue("Client")
 public class Client extends User implements Serializable{
+	
+	
+	
+	public Client(int id, String nom, String prenome, String email, String adresse, String telephone, String pseudo,
+			String mdp) {
+		super(id, nom, prenome, email, adresse, telephone, pseudo, mdp);
+		
+	}
+
+	@Builder
+	public Client(int id, String nom, String prenome, String email, String adresse, String telephone, String pseudo,
+			String mdp, int identifiant, double revenuMens, boolean piecesJustif, Conseiller conseiller) {
+		super(id, nom, prenome, email, adresse, telephone, pseudo, mdp);
+		this.identifiant = identifiant;
+		this.revenuMens = revenuMens;
+		this.piecesJustif = piecesJustif;
+		this.conseiller = conseiller;
+	}
+
+	
 
 	/**
 	 * 
@@ -63,6 +85,8 @@ public class Client extends User implements Serializable{
 	
 	@OneToMany(mappedBy = "client")
 	private  List<DemandeClient> demandeClient;
+	
+	
 	
 }
 

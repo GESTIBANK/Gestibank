@@ -13,8 +13,9 @@ public class ClientDaoImpl extends AbstractDao implements ClientDao {
 
 	
 	@Override
-	public void creationClient(Client client) {
+	public Client creationClient(Client client) {
 		em.persist(client);
+		return client;
 	}
 	
 			

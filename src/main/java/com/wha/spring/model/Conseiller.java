@@ -10,10 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,8 +37,18 @@ private List<Client> listeClients;
 @ManyToOne()
 private Admin admin;
 
-/*@Column(unique=true, nullable=true)
-private List<DemandeOuverture> demandeOuvertureAValider;*/
+@OneToOne(mappedBy = "conseiller")
+private DemandeOuverture demandeOuverture;
+
+@Builder
+public Conseiller(int id, String nom, String prenome, String email, String adresse, String telephone, int matricule,
+		String mdp, String pseudo, List<Client> listeClients, Admin admin, DemandeOuverture demandeOuverture) {
+	super(id, nom, prenome, email, adresse, telephone, pseudo, mdp);
+	this.matricule = matricule;
+	this.listeClients = listeClients;
+	this.admin = admin;
+	this.demandeOuverture = demandeOuverture;
+}
 
 
 

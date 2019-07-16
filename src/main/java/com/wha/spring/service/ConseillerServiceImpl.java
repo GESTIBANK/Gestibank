@@ -1,9 +1,17 @@
 package com.wha.spring.service;
 
-import com.mysql.fabric.xmlrpc.Client;
-import com.wha.spring.iservice.ConseillerService;
-import com.wha.spring.model.Compte;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.wha.spring.iservice.ConseillerService;
+import com.wha.spring.model.Client;
+import com.wha.spring.model.Compte;
+import com.wha.spring.model.Conseiller;
+import com.wha.spring.model.DemandeOuverture;
+
+@Service("conseillerService")
+@Transactional
 public class ConseillerServiceImpl implements ConseillerService{
 
 	@Override
@@ -25,9 +33,10 @@ public class ConseillerServiceImpl implements ConseillerService{
 	}
 
 	@Override
-	public void validationDemandeOuverture() {
-		// TODO Auto-generated method stub
-		
+	public Client validationDemandeOuverture(DemandeOuverture demandeOuverture) {
+		demandeOuverture.setValide(true);		
+		Client client= new Client(0, demandeOuverture.getClientPotentiel().getNom(), demandeOuverture.getClientPotentiel().getPrenome(), demandeOuverture.getClientPotentiel().getEmail(), "", "", "", "");
+		return client;
 	}
 
 	@Override

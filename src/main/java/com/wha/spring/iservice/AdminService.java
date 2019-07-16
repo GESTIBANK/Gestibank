@@ -7,7 +7,7 @@ import com.wha.spring.model.DemandeOuverture;
 
 public interface AdminService {
 	
-	Conseiller creationConseiller(int id);
+	Conseiller creationConseiller(Conseiller conseiller);
 	
 	void supprimerConseiller(Conseiller conseiller);
 	
@@ -15,6 +15,6 @@ public interface AdminService {
 	
 	void reaffectationClient(Client client, Conseiller conseiller);
 	
-	void affectationDemandeOuverture(Conseiller conseiller);
+	void affectationDemandeOuverture(DemandeOuverture demandeOuverture,Conseiller conseiller);
 
 }

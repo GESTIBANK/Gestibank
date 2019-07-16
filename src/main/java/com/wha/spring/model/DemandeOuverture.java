@@ -30,5 +30,8 @@ public class DemandeOuverture implements Serializable{
 	boolean valide;
 	@ManyToOne()
 	private Admin admin;
+	
+	@ManyToOne()
+	private Conseiller conseiller;
 
 }

@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wha.spring.idao.DemandeOuvertureDAO;
+import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.UserService;
+import com.wha.spring.model.ClientPotentiel;
+import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
 
 @RestController
@@ -22,16 +26,24 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	ClientPotentielService clientPService;
+
+	@Autowired
+	DemandeOuvertureDAO demandeOuvertureDAO;
 
 	@RequestMapping(value = "/create/dummy", method = RequestMethod.GET)
 	public void dummy() {
-		User u1 = new User(0, "Jemal Ahmed", "Ahmed.Jemal", "jmlhmd@gmail.com");
-		User u2 = new User(0, "Leanne Graham", "Bret", "Sincere@april.biz");
-		User u3 = new User(0, "Clementina DuBuque", "Moriah.Stanton", "Rey.Padberg@karina.biz");
-		userService.saveUser(u1);
-		userService.saveUser(u2);
-		userService.saveUser(u3);
+		// User u1 = new User(0, "Jemal Ahmed", "Ahmed.Jemal",
+		// "jmlhmd@gmail.com");
+		// User u2 = new User(0, "Leanne Graham", "Bret", "Sincere@april.biz");
+		// User u3 = new User(0, "Clementina DuBuque", "Moriah.Stanton",
+		// "Rey.Padberg@karina.biz");
+		// userService.saveUser(u1);
+		// userService.saveUser(u2);
+		// userService.saveUser(u3);
 	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/get/all", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAll() {
@@ -39,7 +51,7 @@ public class UserController {
 		return new ResponseEntity<List<User>>(resultat, HttpStatus.OK);
 	}
 
-	//@CrossOrigin(origins = "http://localhost:4200")
+	// @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/create")
 	public User createUser(@RequestBody User user) {
 		User newUser = userService.saveUser(user);
@@ -51,5 +63,15 @@ public class UserController {
 	public User updateUser(@RequestBody User user) {
 		userService.updateUser(user);
 		return user;
+	}
+
+	// @CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/clientPotentiel")
+	public ClientPotentiel clientPotentiel(@RequestBody ClientPotentiel clientp) {
+		DemandeOuverture d = demandeOuvertureDAO.createDemandeOuverture();
+		System.out.println(d);
+		clientp.setDemandeOuverture(d);
+		clientPService.addClientP(clientp);
+		return clientp;
 	}
 }

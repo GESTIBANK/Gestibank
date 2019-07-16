@@ -24,7 +24,7 @@ public class ClientPotentiel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne()
 	private DemandeOuverture demandeOuverture;
 	
 	private String name;

@@ -3,11 +3,15 @@ package com.wha.spring.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,15 +27,14 @@ import lombok.Setter;
 @DiscriminatorValue("Conseiller")
 public class Conseiller extends User implements Serializable{
 
-@GeneratedValue(strategy=GenerationType.IDENTITY)
+@Column(unique=true, nullable=false)
 private int matricule;
 
 @OneToMany(mappedBy = "conseiller")
 private List<Client> listeClients;
-@OneToMany(mappedBy = "conseiller")
-private List<DemandeClient> listeDemandeClient;
-@OneToMany(mappedBy = "conseiller")
-private List<DemandeOuverture> listeDemandeOuvertureAValider;
+@ManyToOne()
+private Admin admin;
+
 
 
 }

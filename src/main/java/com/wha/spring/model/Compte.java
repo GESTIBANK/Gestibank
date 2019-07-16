@@ -37,7 +37,7 @@ public class Compte implements Serializable{
 	private float solde;
 	
 	
-	@OneToMany(mappedBy="compte")
+	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Transaction> transactions;
 	
 	@Column(name="decouvert")
@@ -53,7 +53,7 @@ public class Compte implements Serializable{
 	private String typeCompte;
 	
 	
-	@OneToMany(mappedBy="compte")
+	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Notification> notifications;
 }
 

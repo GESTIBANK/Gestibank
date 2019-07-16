@@ -5,23 +5,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wha.spring.idao.AdminDao;
-import com.wha.spring.idao.UserDao;
 import com.wha.spring.iservice.AdminService;
-import com.wha.spring.iservice.UserService;
+
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
-import com.wha.spring.model.User;
+
 
 @Service("adminService")
 @Transactional
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl {
 	
-	@Autowired
-	AdminDao adminDAO;
+	/*@Autowired
+	AdminDao adminDAO;*/
 	
-	@Override
+	/*@Override
 	public Conseiller creationConseiller() {
 		// TODO Auto-generated method stub
 		return null;
@@ -45,12 +44,12 @@ public class AdminServiceImpl implements AdminService{
 	/**@Override
 	public void creationAdmin(User user) {
 		adminDAO.creationAdmin(user);
-	}**/
+	}
 	@Override
 	public void creationAdmin(Admin administrateur) {
 		adminDAO.creationAdmin(administrateur);
 		
-	}
+	}**/
 	
 	
     

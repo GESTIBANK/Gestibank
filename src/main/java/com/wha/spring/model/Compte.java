@@ -6,9 +6,12 @@ import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.wha.spring.model.Admin.AdminBuilder;
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,8 +55,19 @@ public class Compte implements Serializable{
 	@Column(name="montant_remuneration")
 	private String typeCompte;
 	
+	@Column(name="gele")
+	private Boolean gele;
 	
 	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Notification> notifications;
+
+	@Builder
+	public Compte(int numeroCompte, Client client, int rib, float solde,
+			int decouvert, int montantAgios, float seuilRemuneration,
+			String typeCompte, Boolean gele) {
+	}
+	
+	
+	
 }
 

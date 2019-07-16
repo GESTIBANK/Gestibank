@@ -17,6 +17,7 @@ import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
+import com.wha.spring.iservice.CompteService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.ClientPotentiel;
@@ -30,6 +31,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
 	@Autowired
 	ClientPotentielService clientPService;
 
@@ -42,10 +44,19 @@ public class UserController {
 	@Autowired
 	AdminService adminService;
 	
+	@Autowired
+	CompteService compteService;
+	
 	@RequestMapping(value = "/create/dummy", method = RequestMethod.GET)
 	public void dummy() {
 		 /*Admin admin = new Admin(0, "admin", "admin","admin@admin.com","1 rue admin", "0000000000","admin","admin",null,null);
 		 adminService.createAdmin(admin);*/
+	}
+	
+	@RequestMapping(value = "/create/dummyaccount", method = RequestMethod.GET)
+	public void dummyAccount() {
+		 Compte compte = new Compte(0, null, 100, 122, 10223, 200,8,"cheque",false);
+		 compteService.createCompte(compte);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")

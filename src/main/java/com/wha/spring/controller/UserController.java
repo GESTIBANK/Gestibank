@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
+import com.wha.spring.iservice.CompteService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.ClientPotentiel;
 import com.wha.spring.model.Compte;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
-import com.wha.spring.service.CompteService;
 
 @RestController
 @RequestMapping("users")
@@ -30,6 +30,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
 	@Autowired
 	ClientPotentielService clientPService;
 
@@ -50,7 +51,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/create/dummyaccount", method = RequestMethod.GET)
 	public void dummyAccount() {
-		 Compte compte = new Compte();
+		 Compte compte = new Compte(0, null, 100, 122, 10223, 200,8,"cheque",false);
 		 compteService.createCompte(compte);
 	}
 

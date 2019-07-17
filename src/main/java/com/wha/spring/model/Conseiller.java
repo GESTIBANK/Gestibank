@@ -34,15 +34,20 @@ public class Conseiller extends User implements Serializable{
 @Column(unique=true, nullable=true)
 private int matricule;
 
+@JsonIgnore
 @OneToMany(mappedBy = "conseiller")
 @JsonIgnore
 private List<Client> listeClients;
+
 @ManyToOne()
 private Admin admin;
+
 
 @JsonIgnore
 @OneToMany(mappedBy = "conseiller")
 private List<DemandeOuverture> demandeOuvertureList;
+
+
 
 @Builder
 public Conseiller(int id, String nom, String prenome, String email, String adresse, String telephone, int matricule,

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,15 +16,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import com.wha.spring.idao.ClientDao;
 import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.iservice.AdminService;
+import com.wha.spring.iservice.ClientIService;
 import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.CompteService;
 import com.wha.spring.iservice.ConseillerService;
+import com.wha.spring.iservice.DemandClientService;
+import com.wha.spring.iservice.DemandeOuvertureService;
 import com.wha.spring.iservice.TransactionService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
@@ -31,6 +37,7 @@ import com.wha.spring.model.Client;
 import com.wha.spring.model.ClientPotentiel;
 import com.wha.spring.model.Compte;
 import com.wha.spring.model.Conseiller;
+import com.wha.spring.model.DemandeClient;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.Transaction;
 import com.wha.spring.model.User;
@@ -47,6 +54,8 @@ public class UserController {
 
 	@Autowired
 	DemandeOuvertureDAO demandeOuvertureDAO;
+	@Autowired
+	DemandeOuvertureService demandeOuvertureService;
 
 	@Autowired
 	ConseillerDao conseillerDao;
@@ -62,9 +71,16 @@ public class UserController {
 
 	@Autowired
 	CompteService compteService;
+	
+	@Autowired
+	DemandClientService demandClientService;
+	
 	@Autowired
 	TransactionService transactionService;
 	
+	@Autowired
+	ClientIService clientService;
+
 	@RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
 	public void dummy() {
 		Admin admin = new Admin(0, "admin", "admin", "admin@admin.com",
@@ -74,17 +90,10 @@ public class UserController {
 
 	@RequestMapping(value = "/createCompte", method = RequestMethod.GET)
 	public Compte dummyAccount() {
-		 Compte compte = new Compte(0, null, 200, 222, 510223, 2200,18,"epargne",false);
-		 compteService.createCompte(compte);
-		 return compte;
-	}
-	
-	@RequestMapping(value = "/createTransaction", method = RequestMethod.GET)
-	public Compte dummyTransaction() {
-		return null;
-//		Transaction transaction = new Transaction(0, null, "test",200, 'December 17, 1995 03:24:00';
-//		 transactionService.creationTransaction(transaction);
-//		 return transaction;
+		Compte compte = new Compte(0, null, 100, 122, 10223, 200, 8, "cheque",
+				false);
+		compteService.createCompte(compte);
+		return compte;
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -92,6 +101,7 @@ public class UserController {
 	public ResponseEntity<List<User>> getAll() {
 		List<User> resultat = userService.findAllUsers();
 		return new ResponseEntity<List<User>>(resultat, HttpStatus.OK);
+		
 	}
 
 	// @CrossOrigin(origins = "http://localhost:4200")
@@ -139,21 +149,21 @@ public class UserController {
 	// @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/createClient")
 	public Client createClient(@RequestBody DemandeOuverture demandeOuverture) {
+		
+		
 
 		return clientDao.creationClient(conseillerService
 				.validationDemandeOuverture(demandeOuverture));
 
 	}
 
-	// @CrossOrigin(origins = "http://localhost:4200")
-	// @PostMapping(value = "/demandesATraiter")
-	// public Client demandesATraiter(@RequestBody DemandeOuverture
-	// demandeOuverture) {
+	@PostMapping(value = "/validationDemandeOuverture/{id}")
+	public void validationDemandeOuverture(
+			@PathVariable("id") int id) {
+		System.out.println("*************************" +demandeOuvertureDAO.findById(id));
+		conseillerService.validationDemandeOuverture(demandeOuvertureDAO.findById(id));
 
-	// return
-	// clientDao.creationClient(conseillerService.validationDemandeOuverture(demandeOuverture));
-
-	// }
+			}
 
 	// @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/affectationConseillerDemande/{id}")
@@ -178,5 +188,78 @@ public class UserController {
 	public void suppressionConseiller(){
 		
 	}
+	
+	// @CrossOrigin(origins = "http://localhost:4200")
+		@RequestMapping(value = "/afficherClient/{id}", method = RequestMethod.GET)
+		public Client afficherClient(@PathVariable("id")int id){
+			
+			return conseillerService.afficherDetail(id);
+		}
+		
+		@PostMapping( "/createCompte")
+	    public Compte dummyAccount(@RequestBody Compte compte) {
+	         compteService.createCompte(compte);
+	         return compte;
+	    }
+        // @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(value = "/deleteConseiller/{id}")
+    public String suppressionConseiller(@PathVariable("id") int id){
+        try{
+            adminService.supprimerConseiller((Conseiller)conseillerDao.findById(id));
+            return "Suppression ok";
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "Not possible to delete Conseiller";
+            
+        }
+    }
+        // @CrossOrigin(origins = "http://localhost:4200")
+        @PostMapping(value = "/affectationConseillerClient/{id}")
+        public void affectationConseillerClient(
+                @RequestBody List<Client>clientList,
+                @PathVariable("id") int id) {
+            adminService.affectationClient(clientList, id);
+
+                }
+
+   
+    
+    @RequestMapping(value = "/gelerCompte/{compteId}", method = RequestMethod.GET)
+   public Compte gelerCompte(@PathVariable int compteId) {
+       Compte compte = compteService.findById(compteId);
+       System.out.println(compte);
+
+       compte.setGele(!compte.getGele());
+       compteService.updateCompte(compte);
+       Boolean geleornot = compte.getGele();
+       System.out.println(geleornot);
+
+       return compte;
+   }
+    
+    @PostMapping( "/createTransaction")
+    public Transaction dummyTransaction(@RequestBody Transaction transaction) {
+        transactionService.creationTransaction(transaction);
+        return transaction;
+    }
+        
+        
+    
+    @PostMapping(value = "/createDemande")
+    public DemandeClient createDemande(@RequestBody DemandeClient demandeClient) {
+        System.out.println("******************************"+demandeClient);
+        demandClientService.createDemande(demandeClient);
+        return demandeClient;
+
+    }
+    
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "/get/allClient", method = RequestMethod.GET)
+    public ResponseEntity<List<Client>> getAllClient() {
+        System.out.println("******************************");
+        List<Client> resultat = clientService.findAllClients();
+        return new ResponseEntity<List<Client>>(resultat, HttpStatus.OK);
+    }
 
 }

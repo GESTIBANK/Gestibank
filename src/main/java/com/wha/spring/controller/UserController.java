@@ -24,6 +24,7 @@ import com.wha.spring.iservice.AdminService;
 import com.wha.spring.iservice.ClientPotentielService;
 import com.wha.spring.iservice.CompteService;
 import com.wha.spring.iservice.ConseillerService;
+import com.wha.spring.iservice.TransactionService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
@@ -31,6 +32,7 @@ import com.wha.spring.model.ClientPotentiel;
 import com.wha.spring.model.Compte;
 import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
+import com.wha.spring.model.Transaction;
 import com.wha.spring.model.User;
 
 @RestController
@@ -60,7 +62,9 @@ public class UserController {
 
 	@Autowired
 	CompteService compteService;
-
+	@Autowired
+	TransactionService transactionService;
+	
 	@RequestMapping(value = "/createAdmin", method = RequestMethod.GET)
 	public void dummy() {
 		Admin admin = new Admin(0, "admin", "admin", "admin@admin.com",
@@ -70,10 +74,17 @@ public class UserController {
 
 	@RequestMapping(value = "/createCompte", method = RequestMethod.GET)
 	public Compte dummyAccount() {
-		Compte compte = new Compte(0, null, 100, 122, 10223, 200, 8, "cheque",
-				false);
-		compteService.createCompte(compte);
-		return compte;
+		 Compte compte = new Compte(0, null, 200, 222, 510223, 2200,18,"epargne",false);
+		 compteService.createCompte(compte);
+		 return compte;
+	}
+	
+	@RequestMapping(value = "/createTransaction", method = RequestMethod.GET)
+	public Compte dummyTransaction() {
+		return null;
+//		Transaction transaction = new Transaction(0, null, "test",200, 'December 17, 1995 03:24:00';
+//		 transactionService.creationTransaction(transaction);
+//		 return transaction;
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")

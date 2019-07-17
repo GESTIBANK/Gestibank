@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.wha.spring.test.SaveUserTest" time="0.008" errors="1" skipped="0">
+<testsuite tests="1" failures="0" name="com.wha.spring.test.SaveUserTest" time="0.007" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_45\jre\bin"/>
@@ -27,9 +27,9 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Users\gk\Documents\TP_Backend\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf7440446050061382104.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\gk\workspaceWEbApp\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8065994266055686626.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_45\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_45/bin/server;C:/Program Files/Java/jre1.8.0_45/bin;C:/Program Files/Java/jre1.8.0_45/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\binaries\php\php_runningversion;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_45\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\gk\AppData\Roaming\npm;C:\Users\gk\AppData\Local\Programs\Microsoft VS Code\bin;C:\instal\eclipse Luna for web\eclipse-jee-luna-SR2-win32-x86_64\eclipse;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_45\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_45/bin/server;C:/Program Files/Java/jre1.8.0_45/bin;C:/Program Files/Java/jre1.8.0_45/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\binaries\php\php_runningversion;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\gk\AppData\Roaming\npm;C:\Users\gk\AppData\Local\Programs\Microsoft VS Code\bin;C:\instal\eclipse Luna for web\eclipse-jee-luna-SR2-win32-x86_64\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.wha.spring.test.SaveUserTest" name="test" time="0.008">
+  <testcase classname="com.wha.spring.test.SaveUserTest" name="test" time="0.007">
     <error message="Failed to load ApplicationContext" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -95,7 +95,7 @@
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;adminService&apos;: Unsatisfied dependency expressed through field &apos;adminDAO&apos;; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.wha.spring.idao.AdminDao&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name &apos;userController&apos;: Unsatisfied dependency expressed through field &apos;transactionService&apos;; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.wha.spring.iservice.TransactionService&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:592)
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:370)
@@ -116,37 +116,13 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
 	... 31 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.wha.spring.idao.AdminDao&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type &apos;com.wha.spring.iservice.TransactionService&apos; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1466)
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1097)
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1059)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:589)
 	... 49 more
 </error>
-    <system-out>Hibernate: create table ClientPotentiel (id integer not null auto_increment, email varchar(255), name varchar(255), piecesJustif tinyblob, revenuMens integer not null, username varchar(255), demandeOuverture_id integer, primary key (id)) ENGINE=InnoDB
-Hibernate: create table Compte (numero_compte integer not null, decouvert integer, montant_agios integer, rib integer, seuil_remuneration float, solde float, montant_remuneration varchar(255), client_id integer, primary key (numero_compte)) ENGINE=InnoDB
-Hibernate: create table DemandeClient (idDemande integer not null, IDENTIFIANT integer not null, MESSAGE varchar(255) not null, NUMEROCOMPTE integer not null, type varchar(12), client_id integer, primary key (idDemande)) ENGINE=InnoDB
-Hibernate: create table DemandeOuverture (id integer not null auto_increment, valide bit not null, admin_id integer, primary key (id)) ENGINE=InnoDB
-Hibernate: create table hibernate_sequence (next_val bigint) ENGINE=InnoDB
-Hibernate: insert into hibernate_sequence values ( 1 )
-Hibernate: insert into hibernate_sequence values ( 1 )
-Hibernate: insert into hibernate_sequence values ( 1 )
-Hibernate: create table Notification (numero_notification integer not null, message varchar(255), date_creation datetime, compte_numero_compte integer, primary key (numero_notification)) ENGINE=InnoDB
-Hibernate: create table Transaction (numero_transaction integer not null, date_creation datetime, libelle varchar(255), compte_numero_compte integer, primary key (numero_transaction)) ENGINE=InnoDB
-Hibernate: create table User (UserType varchar(31) not null, id integer not null auto_increment, ADRESSE varchar(255) not null, EMAIL varchar(255) not null, MDP varchar(255) not null, NOM varchar(255) not null, PRENOME varchar(255) not null, PSEUDO varchar(255) not null, TELEPHONE varchar(255) not null, identifiant integer not null, PIECESJUSTIF bit not null, REVENUMENS double precision not null, matricule integer not null, conseiller_id integer, admin_id integer, primary key (id)) ENGINE=InnoDB
-Hibernate: alter table User drop constraint UK_tqykw68d3h3nt1l3kfhraevrb
-Hibernate: alter table User add constraint UK_tqykw68d3h3nt1l3kfhraevrb unique (identifiant)
-Hibernate: alter table User drop constraint UK_n69707mkdh0mkarse9lnqowap
-Hibernate: alter table User add constraint UK_n69707mkdh0mkarse9lnqowap unique (matricule)
-Hibernate: alter table ClientPotentiel add constraint FKktxo1mv3ge963up0rqo85ougp foreign key (demandeOuverture_id) references DemandeOuverture (id)
-Hibernate: alter table Compte add constraint FKsjjl4fn17t9uy552so0l9xlc7 foreign key (client_id) references User (id)
-Hibernate: alter table DemandeClient add constraint FKqegkvcla7ay8safclguyi53rt foreign key (client_id) references User (id)
-Hibernate: alter table DemandeOuverture add constraint FKrbvy1ybhogplfgnale147tqcr foreign key (admin_id) references User (id)
-Hibernate: alter table Notification add constraint FKexqxclwu5h79db1pp2fbnxlhl foreign key (compte_numero_compte) references Compte (numero_compte)
-Hibernate: alter table Transaction add constraint FKi3myp4v0jy1h39gnm3eta9et6 foreign key (compte_numero_compte) references Compte (numero_compte)
-Hibernate: alter table User add constraint FKhxmya4arepr61arw9kgietuxa foreign key (conseiller_id) references User (id)
-Hibernate: alter table User add constraint FK6wked2tnrv6fupvvqfra0x0j0 foreign key (admin_id) references User (id)
-</system-out>
     <system-err>log4j:WARN No appenders could be found for logger (org.springframework.test.context.junit4.SpringJUnit4ClassRunner).
 log4j:WARN Please initialize the log4j system properly.
 log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.

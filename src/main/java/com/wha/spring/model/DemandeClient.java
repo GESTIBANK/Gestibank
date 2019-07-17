@@ -46,10 +46,10 @@ public class DemandeClient implements Serializable {
 	@Column(length = 12)
 	private TypeRequest type;
 
-	@Column(name = "MESSAGE", nullable = false)
+	@Column(name = "message", nullable = false)
 	private String message;
 
-	@Column(name = "NUMEROCOMPTE", nullable = false)
+	@Column(name = "id_compte", nullable = false)
 	private int numeroCompte;
 
 	

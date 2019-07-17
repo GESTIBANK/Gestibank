@@ -16,4 +16,6 @@ public interface ClientDao {
 
 	List<Client> findAllClients();
 	
+	void updateClient(Client client);
+	// List<Compte> getComptes(int id);
 }

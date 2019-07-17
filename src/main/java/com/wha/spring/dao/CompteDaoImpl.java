@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wha.spring.idao.CompteDao;
+import com.wha.spring.model.Client;
 import com.wha.spring.model.Compte;
 
 @Repository("compteDao")
@@ -38,7 +39,13 @@ public class CompteDaoImpl extends AbstractDao implements CompteDao {
 	@Override
 	public void deleteCompte(int id) {
 		// TODO Auto-generated method stub
-		em.remove(findById(id));
+	}
+
+	@Override
+	public List<Compte> findCompteByClient(Client client) {
+		return em.createQuery("SELECT c FROM Compte c WHERE c.client LIKE :custId")
+				.setParameter("custId", client)
+				.getResultList();
 	}
 
 }

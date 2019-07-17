@@ -1,10 +1,13 @@
 package com.wha.spring.iservice;
 
 
+import java.util.List;
+
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Compte;
 import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
+import com.wha.spring.model.User;
 
 
 public interface ConseillerService {
@@ -17,5 +20,8 @@ public interface ConseillerService {
 	void rechercheParCompte(String numcompte);
 	void aficherDetail(Compte compte);
 	Client afficherDetail(int id);
+	Compte creerCompteClient(Client client);
+	void setClientList(List<Client> client);
+	Conseiller findById(int id);
 
 }

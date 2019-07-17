@@ -3,10 +3,15 @@ package com.wha.spring.model;
 import java.util.*;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -22,9 +27,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Getter
 @Setter
 @NoArgsConstructor
+@DiscriminatorValue("Transaction")
+@DiscriminatorColumn(name="TransactionType", discriminatorType=DiscriminatorType.STRING)
 @NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
 @Table(name = "Transaction")
 public class Transaction {
@@ -37,30 +45,25 @@ public class Transaction {
 	@JoinColumn(name="numero_compte")
     private Compte compte;
 	
-	@Column(name="libelle")
-	private String libelle;
+	@Column(name="typeMvt")
+	private String typeMvt;
 	
 	@Column(name="montant")
 	private int montant;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_creation")
-	private Date date;
+	private Date date= new Date();
 	
 	//@Column(name="type_transaction")
 	//private Transaction typeTransaction;
 	
 	@Builder
-	public Transaction(int numeroTransaction, Compte compte, String libelle,
-			int montant, Date date
-			, Transaction typeTransaction
-			) {
+	public Transaction(int montant, Date date, String typeMvt) {
 		super();
-		this.numeroTransaction = numeroTransaction;
-		this.compte = compte;
-		this.libelle = libelle;
+		
 		this.montant = montant;
 		this.date = date;
-		//this.typeTransaction = typeTransaction;
+		this.typeMvt = typeMvt;
 	}
 }

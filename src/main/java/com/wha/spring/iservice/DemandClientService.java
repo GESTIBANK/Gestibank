@@ -4,4 +4,5 @@ import com.wha.spring.model.DemandeClient;
 
 public interface DemandClientService {
 	void createDemande(DemandeClient demandeClient);
+
 }

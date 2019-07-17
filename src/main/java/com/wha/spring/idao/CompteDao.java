@@ -2,6 +2,7 @@ package com.wha.spring.idao;
 
 import java.util.List;
 
+import com.wha.spring.model.Client;
 import com.wha.spring.model.Compte;
 
 public interface CompteDao {
@@ -15,4 +16,5 @@ public interface CompteDao {
 	Compte findById(int id);
 
 	void deleteCompte(int id);
+    List<Compte> findCompteByClient(Client client);
 }

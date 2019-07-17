@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +17,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Embeddable
+@Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@DiscriminatorValue("Debit")
 public class Debit extends Transaction {
 	
+	@Column( nullable=true)
+	private int montant;
+	@Column( nullable=true)
+	private Date dateMvt= new Date();
+	@Column( nullable=true)
+	private String libelle;
 }

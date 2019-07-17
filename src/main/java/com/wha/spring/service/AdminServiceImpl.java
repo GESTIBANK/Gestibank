@@ -13,6 +13,7 @@ import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.idao.UserDao;
 import com.wha.spring.iservice.AdminService;
+import com.wha.spring.iservice.ClientIService;
 import com.wha.spring.iservice.ConseillerService;
 import com.wha.spring.iservice.DemandeOuvertureService;
 import com.wha.spring.model.Admin;
@@ -36,6 +37,10 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	ConseillerDao conseillerDAO;
+	@Autowired
+	ConseillerService conseillerService;
+	@Autowired
+	ClientIService clientService;
 	
 	@Override
 	public Conseiller creationConseiller(Conseiller conseiller) {
@@ -57,16 +62,13 @@ public class AdminServiceImpl implements AdminService{
 		listeClients.add(client);
 		conseiller.setListeClients(listeClients);*/
 		//conseillerDAO.saveUser(conseiller);
-		List<Client> listeClients = new ArrayList<Client>();
-		listeClients = ((Conseiller)conseillerDAO.findById(id)).getListeClients();
+		//List<Client> listeClients = new ArrayList<Client>();
+		//listeClients = ((Conseiller)conseillerDAO.findById(id)).getListeClients();
 		for(Client client: clientList){
-			listeClients.add(client);
-			client.setConseiller((Conseiller)conseillerDAO.findById(id));
-			System.out.println("********************************************");
-			System.out.println(((Conseiller)conseillerDAO.findById(id)).getNom());
-			System.out.println(client.getConseiller().getId());
+			client.setConseiller(conseillerService.findById(id));
+			clientService.updateClient(client);
 		}
-		((Conseiller)conseillerDAO.findById(id)).setListeClients(listeClients);
+		
 		
 		
 	}

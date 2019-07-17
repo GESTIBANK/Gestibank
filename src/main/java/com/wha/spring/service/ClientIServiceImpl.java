@@ -35,5 +35,18 @@ public class ClientIServiceImpl implements ClientIService {
 		return clientDao.findAllClients();
 	}
 
+	@Override
+	public Client findById(int id) {
+		return clientDao.findByIdentifiant(id);
+	}
+
+	@Override
+	public void updateClient(Client client) {
+		
+		clientDao.updateClient(client);
+	}
+
+
+
 
 }

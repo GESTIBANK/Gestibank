@@ -42,4 +42,12 @@ public class ClientDaoImpl extends AbstractDao implements ClientDao {
 		return em.createQuery("From Client").getResultList();
 	}
 	
+	@Override
+	public void updateClient(Client client) {
+		em.merge(client);
+	}
+
+
+	
+	
 }

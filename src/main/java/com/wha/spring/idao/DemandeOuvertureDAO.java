@@ -10,6 +10,7 @@ public interface DemandeOuvertureDAO {
 	List<DemandeOuverture> getDemandeOuverture();
 	List<DemandeOuverture> getDemandeOuvertureNonTraitees();
 	void updateDemandeOuverture(DemandeOuverture demandeOuverture);
+	 DemandeOuverture findById(int id);
 
 
 }

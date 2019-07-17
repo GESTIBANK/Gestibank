@@ -16,6 +16,6 @@ public interface ConseillerService {
 	void rechercheParClient(String identifient);
 	void rechercheParCompte(String numcompte);
 	void aficherDetail(Compte compte);
-	void afficherDetail(Client client);
+	Client afficherDetail(int id);
 
 }

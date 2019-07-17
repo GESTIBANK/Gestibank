@@ -1,5 +1,7 @@
 package com.wha.spring.iservice;
 
+import java.util.List;
+
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Conseiller;
@@ -15,6 +17,6 @@ public interface AdminService {
 	
 	void reaffectationClient(Client client, Conseiller conseiller);
 	
-	void affectationDemandeOuverture(DemandeOuverture demandeOuverture,Conseiller conseiller);
+	void affectationDemandeOuverture(List<DemandeOuverture> demandeOuvertureList,int id);
 
 }

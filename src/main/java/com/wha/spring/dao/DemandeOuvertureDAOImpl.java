@@ -27,4 +27,10 @@ public class DemandeOuvertureDAOImpl extends AbstractDao implements DemandeOuver
 	return em.createQuery("From DemandeOuverture").getResultList();
 	}
 
+	@Override
+	public void updateDemandeOuverture(DemandeOuverture demandeOuverture) {
+		em.merge(demandeOuverture);
+		
+	}
+
 }

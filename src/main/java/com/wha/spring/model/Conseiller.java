@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ManyToAny;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,17 +39,18 @@ private List<Client> listeClients;
 @ManyToOne()
 private Admin admin;
 
-@OneToOne(mappedBy = "conseiller")
-private DemandeOuverture demandeOuverture;
+@JsonIgnore
+@OneToMany(mappedBy = "conseiller")
+private List<DemandeOuverture> demandeOuvertureList;
 
 @Builder
 public Conseiller(int id, String nom, String prenome, String email, String adresse, String telephone, int matricule,
-		String mdp, String pseudo, List<Client> listeClients, Admin admin, DemandeOuverture demandeOuverture) {
+		String mdp, String pseudo, List<Client> listeClients, Admin admin, List<DemandeOuverture> demandeOuvertureList) {
 	super(id, nom, prenome, email, adresse, telephone, pseudo, mdp);
 	this.matricule = matricule;
 	this.listeClients = listeClients;
 	this.admin = admin;
-	this.demandeOuverture = demandeOuverture;
+	this.demandeOuvertureList = demandeOuvertureList;
 }
 
 

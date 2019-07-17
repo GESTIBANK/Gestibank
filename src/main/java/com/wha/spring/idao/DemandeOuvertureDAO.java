@@ -8,5 +8,7 @@ public interface DemandeOuvertureDAO {
 	
 	DemandeOuverture createDemandeOuverture();
 	List<DemandeOuverture> getDemandeOuverture();
+	void updateDemandeOuverture(DemandeOuverture demandeOuverture);
+
 
 }

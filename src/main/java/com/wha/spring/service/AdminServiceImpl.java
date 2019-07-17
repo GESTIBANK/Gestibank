@@ -12,6 +12,7 @@ import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.idao.UserDao;
 import com.wha.spring.iservice.AdminService;
+import com.wha.spring.iservice.DemandeOuvertureService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Conseiller;
@@ -22,8 +23,8 @@ import com.wha.spring.model.DemandeOuverture;
 @Transactional
 public class AdminServiceImpl implements AdminService{
 	
-
-	
+	@Autowired
+	DemandeOuvertureDAO demandeOuvertureDao;
 	
 	@Autowired
 	AdminDao adminDAO;
@@ -33,8 +34,6 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	ConseillerDao conseillerDAO;
-	@Autowired
-	DemandeOuvertureDAO demandeOuvertureDao;  
 	
 	@Override
 	public Conseiller creationConseiller(Conseiller conseiller) {
@@ -59,12 +58,27 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	@Override
-	public void affectationDemandeOuverture(DemandeOuverture demandeOuverture, Conseiller conseiller ) {
+	public void affectationDemandeOuverture(List<DemandeOuverture> demandeOuvertureList, int id ) {
 		
 		//List<DemandeOuverture> nouvelleListeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
 		//List<DemandeOuverture> listeDemandesOuverture = demandeOuvertureDao.getDemandeOuverture();
 		//listeDemandesOuverture.addAll(nouvelleListeDemandesOuverture);
-		conseiller.setDemandeOuverture(demandeOuverture);
+		for(DemandeOuverture demande: demandeOuvertureList){
+			demande.setATraiter(true);
+			demande.setConseiller((Conseiller) conseillerDAO.findById(id));
+		}
+			
+		
+		
+		Conseiller conseiller =(Conseiller) conseillerDAO.findById(id);
+		for(DemandeOuverture demande: demandeOuvertureList){
+			demandeOuvertureDao.updateDemandeOuverture(demande);
+		}
+		
+		
+		conseiller.getDemandeOuvertureList().addAll(demandeOuvertureList);
+		conseillerDAO.update(conseiller);
+		
 		
 		
 	}

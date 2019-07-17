@@ -10,7 +10,7 @@ import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
 
 
-public interface ConseillerDao  {
+ public interface ConseillerDao  {
 void modificationDecouvert(Compte compte, int montant);
 void modificationRemuneration(Compte compte, float montant);
 void validerDemandeChequier(Compte compte);
@@ -20,6 +20,8 @@ void rechercheParClient(String identifient);
 void rechercheParCompte(String numcompte);
 Compte aficherDetailCompte(Compte compte);
 Client afficherDetailClient(Client client);
-public User findById(int id);
-public void deleteUser(int id);
+ User findById(int id);
+ void deleteUser(int id);
+ void update(Conseiller conseiller);
+
 }

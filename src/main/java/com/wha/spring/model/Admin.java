@@ -8,6 +8,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +27,8 @@ public class Admin extends User implements Serializable {
 	@OneToMany(mappedBy = "admin", cascade = { CascadeType.PERSIST,
 			CascadeType.REMOVE })
 	private List<Conseiller> listeConseillers;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "admin")
 	private List<DemandeOuverture> listeDemandeOuverture;
 

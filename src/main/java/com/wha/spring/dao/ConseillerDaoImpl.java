@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.wha.spring.idao.ClientDao;
 import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.model.Client;
@@ -90,6 +89,13 @@ public class ConseillerDaoImpl extends AbstractDao implements ConseillerDao{
 	public Client afficherDetailClient(Client client) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(Conseiller conseiller) {
+		
+		em.merge(conseiller);
+		
 	}
 
 

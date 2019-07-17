@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -70,7 +72,7 @@ public class Client extends User implements Serializable{
 
 	@Column(unique=true, nullable=true)
 	private int identifiant;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Compte> comptes;
 	
@@ -82,7 +84,7 @@ public class Client extends User implements Serializable{
 	
 	@ManyToOne()
 	private  Conseiller conseiller;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private  List<DemandeClient> demandeClient;
 	

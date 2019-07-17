@@ -45,7 +45,7 @@ public class ConseillerDaoImpl extends AbstractDao implements ConseillerDao{
 	public Client validationDemandeOuverture(DemandeOuverture demandeOuverture, Conseiller conseiller) {
 		demandeOuverture.setValide(true);
 		demandeOuverture.setConseiller(conseiller);
-		Client client= new Client(0, demandeOuverture.getClientPotentiel().getNom(), demandeOuverture.getClientPotentiel().getPrenome(), demandeOuverture.getClientPotentiel().getEmail(), "", "", "", "");
+		Client client= new Client(0, demandeOuverture.getClientPotentiel().getNom(), demandeOuverture.getClientPotentiel().getPrenom(), demandeOuverture.getClientPotentiel().getEmail(), "", "", "", "");
 		return client;
 	}
 

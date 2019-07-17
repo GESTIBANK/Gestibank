@@ -28,7 +28,7 @@ public class ClientPotentiel {
 	private DemandeOuverture demandeOuverture;
 	
 	private String nom;
-	private String prenome;
+	private String prenom;
 	private String email;
 	private int revenuMens;
 	private File[] piecesJustif;

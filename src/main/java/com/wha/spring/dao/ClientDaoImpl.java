@@ -21,9 +21,9 @@ public class ClientDaoImpl extends AbstractDao implements ClientDao {
 			
 	//recherche d'un client par son identifiant
 	@Override
-	public Client findByIdentifiant(int identifiant) {
+	public Client findByIdentifiant(int id) {
 		//Appel de la méthod init de la class Logger
-		return (Client) em.find(Client.class, identifiant);
+		return  em.find(Client.class, id);
 	}
 	
 	//suppression d'un client par son identifiant

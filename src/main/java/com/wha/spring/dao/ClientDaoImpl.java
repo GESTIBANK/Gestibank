@@ -1,10 +1,13 @@
 package com.wha.spring.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wha.spring.idao.ClientDao;
 import com.wha.spring.model.Client;
+import com.wha.spring.model.Compte;
 
 
 @Repository("clientDao")
@@ -32,7 +35,11 @@ public class ClientDaoImpl extends AbstractDao implements ClientDao {
 		em.remove(findByIdentifiant(identifiant));
 		
 	}
-	
-	
 
+
+	@Override
+	public List<Client> findAllClients() {
+		return em.createQuery("From Client").getResultList();
+	}
+	
 }

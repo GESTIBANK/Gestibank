@@ -70,10 +70,7 @@ public class Client extends User implements Serializable{
 
 	@Column(unique=true, nullable=true)
 	private int identifiant;
-<<<<<<< HEAD
 
-=======
->>>>>>> conseiller
 	@JsonIgnore
 	@OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} )
 	private List<Compte> comptes;
@@ -86,10 +83,7 @@ public class Client extends User implements Serializable{
 	
 	@ManyToOne()
 	private  Conseiller conseiller;
-<<<<<<< HEAD
-	
-=======
->>>>>>> conseiller
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private  List<DemandeClient> demandeClient;

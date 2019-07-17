@@ -16,7 +16,32 @@ public class CompteServiceImpl implements CompteService{
 	
 	@Autowired
 	CompteDao compteDAO;
-	public void createCompte(Compte compte){
-		compteDAO.creationCompte(compte);
+	
+	@Override
+	public Compte createCompte(Compte compte) {
+		return compteDAO.createCompte(compte);
 	}
+
+	@Override
+	public Compte findById(int id) {
+		return compteDAO.findById(id);
+	}
+
+	@Override
+	public void updateCompte(Compte compte) {
+		compteDAO.updateCompte(compte);
+		
+	}
+
+	@Override
+	public List<Compte> findAllComptes() {
+		return compteDAO.findAllComptes();
+	}
+
+	@Override
+	public void deleteCompte(int id) {
+		compteDAO.deleteCompte(id);		
+	}
+
+
 }

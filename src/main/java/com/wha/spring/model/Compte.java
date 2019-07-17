@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wha.spring.model.Admin.AdminBuilder;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class Compte implements Serializable{
 	@Column(name="solde")
 	private float solde;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Transaction> transactions;
 	
@@ -52,22 +53,32 @@ public class Compte implements Serializable{
 	@Column(name="seuil_remuneration")
 	private float seuilRemuneration;
 
-	@Column(name="montant_remuneration")
+	@Column(name="type_compte")
 	private String typeCompte;
 	
 	@Column(name="gele")
 	private Boolean gele;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="compte", cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Notification> notifications;
+
 
 	@Builder
 	public Compte(int numeroCompte, Client client, int rib, float solde,
 			int decouvert, int montantAgios, float seuilRemuneration,
 			String typeCompte, Boolean gele) {
+		
+		super();
+		this.numeroCompte = numeroCompte;
+		this.client = client;
+		this.rib = rib;
+		this.solde = solde;
+		this.decouvert = decouvert;
+		this.montantAgios = montantAgios;
+		this.seuilRemuneration = seuilRemuneration;
+		this.typeCompte = typeCompte;
+		this.gele = gele;
 	}
-	
-	
 	
 }
 

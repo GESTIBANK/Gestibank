@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ManyToAny;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -34,9 +36,9 @@ public class Conseiller extends User implements Serializable{
 @Column(unique=true, nullable=true)
 private int matricule;
 
+
 @JsonIgnore
 @OneToMany(mappedBy = "conseiller")
-@JsonIgnore
 private List<Client> listeClients;
 
 @ManyToOne()

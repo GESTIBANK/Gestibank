@@ -35,6 +35,7 @@ public class Conseiller extends User implements Serializable{
 private int matricule;
 
 @OneToMany(mappedBy = "conseiller")
+@JsonIgnore
 private List<Client> listeClients;
 @ManyToOne()
 private Admin admin;

@@ -157,8 +157,15 @@ public class UserController {
 	public ResponseEntity<List<DemandeOuverture>> getDemandeOuverture() {
 
 		return new ResponseEntity<List<DemandeOuverture>>(
-				demandeOuvertureDAO.getDemandeOuverture(), HttpStatus.OK);
+				demandeOuvertureDAO.getDemandeOuvertureNonTraitees(), HttpStatus.OK);
 
+	}
+	
+	
+	// @CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/deleteConseiller", method = RequestMethod.GET)
+	public void suppressionConseiller(){
+		
 	}
 
 }

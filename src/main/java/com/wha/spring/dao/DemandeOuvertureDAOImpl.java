@@ -33,4 +33,9 @@ public class DemandeOuvertureDAOImpl extends AbstractDao implements DemandeOuver
 		
 	}
 
+	@Override
+	public List<DemandeOuverture> getDemandeOuvertureNonTraitees() {
+		return em.createQuery("From DemandeOuverture do where do.aTraiter = false").getResultList();
+	}
+
 }

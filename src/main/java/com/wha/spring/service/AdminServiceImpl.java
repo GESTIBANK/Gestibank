@@ -12,6 +12,7 @@ import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
 import com.wha.spring.idao.UserDao;
 import com.wha.spring.iservice.AdminService;
+import com.wha.spring.iservice.ConseillerService;
 import com.wha.spring.iservice.DemandeOuvertureService;
 import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
@@ -48,13 +49,24 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	@Override
-	public void reaffectationClient(Client client, Conseiller conseiller) {
+	public void affectationClient(List<Client> clientList, int id) {
 		
-		List<Client> listeClients = new ArrayList<Client>();
+		/*List<Client> listeClients = new ArrayList<Client>();
 		listeClients = conseiller.getListeClients();
 		listeClients.add(client);
-		conseiller.setListeClients(listeClients);
+		conseiller.setListeClients(listeClients);*/
 		//conseillerDAO.saveUser(conseiller);
+		List<Client> listeClients = new ArrayList<Client>();
+		listeClients = ((Conseiller)conseillerDAO.findById(id)).getListeClients();
+		for(Client client: clientList){
+			listeClients.add(client);
+			client.setConseiller((Conseiller)conseillerDAO.findById(id));
+			System.out.println("********************************************");
+			System.out.println(((Conseiller)conseillerDAO.findById(id)).getNom());
+			System.out.println(client.getConseiller().getId());
+		}
+		((Conseiller)conseillerDAO.findById(id)).setListeClients(listeClients);
+		
 		
 	}
 	@Override

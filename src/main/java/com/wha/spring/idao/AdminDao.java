@@ -7,4 +7,5 @@ public interface AdminDao {
 
 	void creationAdmin(Admin administrateur);
 	void creationConseiller(Conseiller conseiller);
+	/*void suppressionConseiller(Conseiller conseiller);*/
 }

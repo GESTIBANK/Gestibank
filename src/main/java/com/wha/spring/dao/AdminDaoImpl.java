@@ -26,6 +26,9 @@ public class AdminDaoImpl extends AbstractDao implements AdminDao {
 		
 	}
 
-	
+	/*@Override
+	public void suppressionConseiller(Conseiller conseiller){
+		em.remove(conseiller);
+	}*/
 
 }

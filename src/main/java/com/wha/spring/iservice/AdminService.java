@@ -15,7 +15,7 @@ public interface AdminService {
 	
 	void createAdmin(Admin administrateur);
 	
-	void reaffectationClient(Client client, Conseiller conseiller);
+	void affectationClient(List<Client> clientList, int id);
 	
 	void affectationDemandeOuverture(List<DemandeOuverture> demandeOuvertureList,int id);
 

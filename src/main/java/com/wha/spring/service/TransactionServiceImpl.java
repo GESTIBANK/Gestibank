@@ -1,5 +1,7 @@
 package com.wha.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,5 +23,15 @@ public class TransactionServiceImpl implements TransactionService{
 		transactionDao.creationTransaction(transaction);
 		return transaction;
 		
+	}
+	@Override
+	public List<Transaction> getAllTransaction() {
+		// TODO Auto-generated method stub
+		return transactionDao.getAllTransaction();
+	}
+	@Override
+	public List<Transaction> getTransactionByCompte(int numCompte) {
+		// TODO Auto-generated method stub
+		return transactionDao.getTransactionByCompte(numCompte);
 	}
 }

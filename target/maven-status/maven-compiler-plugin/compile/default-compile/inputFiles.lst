@@ -16,6 +16,8 @@ C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\idao\ConseillerDao.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\idao\UserDao.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\controller\UserController.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\dao\DemandeOuvertureDAOImpl.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\service\DemandeOuvertureServiceImpl.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\service\DemandeClientServiceImpl.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\UserService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Admin.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\service\CompteServiceImpl.java
@@ -24,7 +26,9 @@ C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\config\CORSFilter.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\config\WebConfig.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\ConseillerService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\ClientPotentiel.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\DemandeOuvertureService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Client.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\DemandClientService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\dao\CompteDaoImpl.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\AdminService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\idao\CompteDao.java
@@ -35,7 +39,9 @@ C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\service\TransactionServic
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\ClientIService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\DemandeClient.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\dao\TransactionDaoImpl.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\service\ClientIServiceImpl.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\ClientPotentielService.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\idao\DemandeClientDao.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\iservice\TransactionService.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\User.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Notification.java
@@ -45,5 +51,6 @@ C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Typerequete.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\dao\AbstractDao.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Conseiller.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\idao\AdminDao.java
+C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\dao\DemandeClientDaoImpl.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\model\Debit.java
 C:\Users\gk\git\Gestibank\src\main\java\com\wha\spring\config\JPAConfig.java

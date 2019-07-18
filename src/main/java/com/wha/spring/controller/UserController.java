@@ -21,6 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.wha.spring.dto.LoginDto;
+import com.wha.spring.dto.UserDto;
+import com.wha.spring.dto.helper.UserDtoHelper;
 import com.wha.spring.idao.ClientDao;
 import com.wha.spring.idao.ConseillerDao;
 import com.wha.spring.idao.DemandeOuvertureDAO;
@@ -31,6 +36,7 @@ import com.wha.spring.iservice.CompteService;
 import com.wha.spring.iservice.ConseillerService;
 import com.wha.spring.iservice.DemandClientService;
 import com.wha.spring.iservice.DemandeOuvertureService;
+import com.wha.spring.iservice.LoginService;
 import com.wha.spring.iservice.TransactionService;
 import com.wha.spring.iservice.UserService;
 import com.wha.spring.model.Admin;
@@ -46,6 +52,7 @@ import com.wha.spring.model.Transaction;
 import com.wha.spring.model.User;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("")
 public class UserController {
 
@@ -83,6 +90,34 @@ public class UserController {
 
 	@Autowired
 	ClientIService clientService;
+	
+	@Autowired
+	LoginService loginService;
+	
+//********************************Login**************************************	
+	
+	//@CrossOrigin(origins = "http://localhost:4200/")
+	@PostMapping(value="login")
+	public UserDto createConseiller(@RequestBody LoginDto login) {
+		UserDto result = null;
+		User user = loginService.login(login.getUserName(), login.getPassword());
+		if(user instanceof Client)
+		{
+			result = UserDtoHelper.userToUserDto(user, "Client");
+		} else {
+			if(user instanceof Admin){
+				result = UserDtoHelper.userToUserDto(user, "Admin");
+			}else {
+				if(user instanceof Conseiller){
+					result = UserDtoHelper.userToUserDto(user, "Conseiller");
+				}
+			}
+		}
+		return result;
+
+	}
+
+	
 
 //***************************Admin***********************************************
 	
@@ -94,7 +129,7 @@ public class UserController {
 		adminService.createAdmin(admin);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200/")
 	@RequestMapping(value = "/admin/demandeOuverture", method = RequestMethod.GET)
 	public ResponseEntity<List<DemandeOuverture>> getDemandeOuverture() {
 
@@ -102,6 +137,44 @@ public class UserController {
 				HttpStatus.OK);
 
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping( "admin/conseiller")
+	public Conseiller createConseiller(@RequestBody Conseiller conseiller) {
+		adminService.creationConseiller(conseiller);
+		return conseiller;
+
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping( "admin/conseiller/{id}/affectationDemande")
+	public void affectationConseillerDemande(@RequestBody List<DemandeOuverture> demandeOuvertureList,
+			@PathVariable("id") int id) {
+		adminService.affectationDemandeOuverture(demandeOuvertureList, id);
+
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("admin/conseiller/{id}")
+	public String suppressionConseiller(@PathVariable("id") int id) {
+		try {
+			adminService.supprimerConseiller((Conseiller) conseillerDao.findById(id));
+			return "Suppression ok";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Not possible to delete Conseiller";
+
+		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping( "admin/conseiller/{id}/affectationClient")
+	public String affectationConseillerClient(@RequestBody List<Client> clientList, @PathVariable("id") int id) {
+		adminService.affectationClient(clientList, id);
+		return "ok";
+
+	}
+
 
 //**************** Compte *******************************************************
 	
@@ -113,7 +186,7 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "client/{id}/compte", method = RequestMethod.GET)
-	public List<Compte> createCompte(@PathVariable("id")int id) {
+	public List<Compte> listCompte(@PathVariable("id")int id) {
 				
 		return compteService.findCompteByClient(id);
 	}
@@ -149,39 +222,40 @@ public class UserController {
 		return compte;
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("client/compte/{id}/transaction/debit")
-	public Debit newDebitTransaction(@RequestBody Debit debit, @PathVariable("id") int id) {
-		debit.setCompte(compteService.findById(id));
-		compteService.createTransaction(debit);
-		return debit;
-	}
+	//@CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("client/compte/{id}/transaction/debit")
+    public Compte newDebitTransaction(@RequestBody Debit debit, @PathVariable("id") int id) {
+        Compte compte=compteService.findById(id);
+        
+        debit.setCompte(compteService.findById(id));
+        compteService.createTransaction(debit);
+        float montant = debit.getMontant();
+        float soldeAvant = compteService.findById(id).getSolde();
+        float soldeApres = soldeAvant - montant;
+        compte.setSolde(soldeApres);
+        compteService.updateCompte(compte);
+        return compte;
+    }
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("client/compte/{id}/transaction/credit")
-	public Credit newCreditTransaction(@RequestBody Credit credit, @PathVariable("id") int id) {
-		credit.setCompte(compteService.findById(id));
-		compteService.createTransaction(credit);
-		return credit;
-	}
+   // @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("client/compte/{id}/transaction/credit")
+    public Compte newCreditTransaction(@RequestBody Credit credit, @PathVariable("id") int id) {
+        
+        Compte compte=compteService.findById(id);
+        
+        credit.setCompte(compteService.findById(id));
+        compteService.createTransaction(credit);
+        float montant = credit.getMontant();
+        float soldeAvant = compteService.findById(id).getSolde();
+        float soldeApres = soldeAvant + montant;
+        compte.setSolde(soldeApres);
+        compteService.updateCompte(compte);
+        return compte;
+    }
 
 //******************************Conseiller*********************************************	
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value = "admin/conseiller")
-	public Conseiller createConseiller(@RequestBody Conseiller conseiller) {
-		adminService.creationConseiller(conseiller);
-		return conseiller;
-
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value = "admin/conseiller/{id}/affectationDemande")
-	public void affectationConseillerDemande(@RequestBody List<DemandeOuverture> demandeOuvertureList,
-			@PathVariable("id") int id) {
-		adminService.affectationDemandeOuverture(demandeOuvertureList, id);
-
-	}
+	
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "conseiller/demandeOuverture/{id}/validation")
@@ -192,34 +266,39 @@ public class UserController {
 
 	}
 
+	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("admin/conseiller/{id}")
-	public String suppressionConseiller(@PathVariable("id") int id) {
-		try {
-			adminService.supprimerConseiller((Conseiller) conseillerDao.findById(id));
-			return "Suppression ok";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "Not possible to delete Conseiller";
-
-		}
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping( "admin/conseiller/{id}/affectationClient")
-	public String affectationConseillerClient(@RequestBody List<Client> clientList, @PathVariable("id") int id) {
-		adminService.affectationClient(clientList, id);
-		return "ok";
+	@PostMapping(value = "conseiller/DemandeOuverture/{id}/validation")
+	public Client validationDemandeOuverture(@RequestBody DemandeOuverture demandeOuverture, @PathVariable("id")int id) {
+		return clientDao.creationClient(conseillerService.validationDemandeOuverture(demandeOuvertureService.findById(id)));
 
 	}
-
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value = "conseiller/validationDemandeOuverture")
-	public Client validationDemandeOuverture(@RequestBody DemandeOuverture demandeOuverture) {
-		return clientDao.creationClient(conseillerService.validationDemandeOuverture(demandeOuverture));
+	@RequestMapping(value = "conseiller/client", method = RequestMethod.GET)
+	public ResponseEntity<List<Client>> getAllClient() {
 
+		List<Client> resultat = clientService.findAllClients();
+		return new ResponseEntity<List<Client>>(resultat, HttpStatus.OK);
 	}
-
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "conseiller/client/compte/{numCompte}/transaction", method = RequestMethod.GET)
+    public ResponseEntity<List<Transaction>> getTransactionByCompteId(@PathVariable("numCompte") int numCompte) {
+        
+        List<Transaction> resultat = transactionService.getTransactionByCompte(numCompte);
+        return new ResponseEntity<List<Transaction>>(resultat, HttpStatus.OK);
+    }
+//@CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(value = "conseiller/compte/{compteId}/solde", method = RequestMethod.GET)
+    public float soldeByCompte(@PathVariable int compteId) {
+        Compte compte = compteService.findById(compteId);
+        System.out.println(compte);
+        float solde;
+        solde = compte.getSolde();
+        return solde;
+    }
+	
 //********************************Client******************************************
 	
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -229,7 +308,7 @@ public class UserController {
 		return conseillerService.afficherDetail(id);
 	}
 
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("client/compte/{id}/demande")
 	public DemandeClient createDemande(@RequestBody DemandeClient demandeClient, @PathVariable("id")int id) {
 		
@@ -240,13 +319,7 @@ public class UserController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value = "conseiller/client", method = RequestMethod.GET)
-	public ResponseEntity<List<Client>> getAllClient() {
-
-		List<Client> resultat = clientService.findAllClients();
-		return new ResponseEntity<List<Client>>(resultat, HttpStatus.OK);
-	}
+	
 	
 	
 	

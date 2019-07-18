@@ -33,7 +33,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @DiscriminatorValue("Transaction")
 @DiscriminatorColumn(name="TransactionType", discriminatorType=DiscriminatorType.STRING)
-@NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
+//@NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
 @Table(name = "Transaction")
 public class Transaction {
 	@Id

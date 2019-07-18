@@ -23,5 +23,6 @@ public interface ConseillerService {
 	Compte creerCompteClient(Client client);
 	void setClientList(List<Client> client);
 	Conseiller findById(int id);
+	List<Conseiller> findAll();
 
 }

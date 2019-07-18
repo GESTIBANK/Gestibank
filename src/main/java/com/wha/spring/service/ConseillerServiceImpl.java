@@ -111,6 +111,11 @@ public class ConseillerServiceImpl implements ConseillerService{
 		return (Conseiller) conseillerDao.findById(id);
 	}
 
+	@Override
+	public List<Conseiller> findAll() {
+		return conseillerDao.findAll();
+	}
+
 	
 	
 }

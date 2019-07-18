@@ -98,6 +98,12 @@ public class ConseillerDaoImpl extends AbstractDao implements ConseillerDao{
 		
 	}
 
+	
+	@Override
+	public List<Conseiller> findAll() {
+		return em.createQuery("From Conseiller").getResultList();
+	}
+
 
 	
 

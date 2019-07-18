@@ -21,6 +21,11 @@ public class DemandeOuvertureServiceImpl implements DemandeOuvertureService{
 		
 		demandeOuvertureDao.updateDemandeOuverture(demandeOuverture);
 	}
+
+	@Override
+	public DemandeOuverture findById(int id) {
+		return demandeOuvertureDao.findById(id);
+	}
 	
 	
 

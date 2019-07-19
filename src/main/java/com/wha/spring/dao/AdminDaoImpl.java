@@ -26,6 +26,12 @@ public class AdminDaoImpl extends AbstractDao implements AdminDao {
 		
 	}
 
+	@Override
+	public Conseiller findById(int id) {
+		//Appel de la méthod init de la class Logger
+		return (Conseiller) em.find(Conseiller.class, id);
+	}
+
 	/*@Override
 	public void suppressionConseiller(Conseiller conseiller){
 		em.remove(conseiller);

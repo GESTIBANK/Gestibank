@@ -6,6 +6,7 @@ import com.wha.spring.model.Admin;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
+import com.wha.spring.model.User;
 
 public interface AdminService {
 	
@@ -18,5 +19,6 @@ public interface AdminService {
 	void affectationClient(List<Client> clientList, int id);
 	
 	void affectationDemandeOuverture(List<DemandeOuverture> demandeOuvertureList,int id);
+	Conseiller findById(int id);
 
 }

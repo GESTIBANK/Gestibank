@@ -97,6 +97,10 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 	}
+	@Override
+	public Conseiller findById(int id) {
+		return  (Conseiller) conseillerDAO.findById(id);
+	}
     
 
 }

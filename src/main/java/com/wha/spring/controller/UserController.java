@@ -121,7 +121,7 @@ public class UserController {
 
 //***************************Admin***********************************************
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public void dummy() {
 		Admin admin = new Admin(0, "admin", "admin", "admin@admin.com", "1 rue admin", "0000000000", "admin", "admin",
@@ -168,6 +168,18 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping("admin/conseiller/{id}")
+	public Conseiller getConseillerById(@PathVariable("id") int id) {
+		
+			return adminService.findById(id);
+			
+				
+
+		}
+	
+
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping( "admin/conseiller/{id}/affectationClient")
 	public String affectationConseillerClient(@RequestBody List<Client> clientList, @PathVariable("id") int id) {
 		adminService.affectationClient(clientList, id);
@@ -185,7 +197,7 @@ public class UserController {
 
 //**************** Compte *******************************************************
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("client/compte")
 	public Compte createCompte(@RequestBody Compte compte) {
 		return compteService.createCompte(compte);

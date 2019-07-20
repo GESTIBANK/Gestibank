@@ -1,5 +1,12 @@
 package com.wha.spring.model;
 
-public class Typerequete {
+
+
+
+public enum Typerequete {
+	CHEQUIER,
+	MOTDEPASSE,
+	DECOUVERTE,
+	REMUNERATION
 
 }

@@ -27,7 +27,7 @@ public class TransactionDaoImpl extends AbstractDao implements TransactionDao{
 
 	@Override
 	public List<Transaction> getTransactionByCompte(int numCompte) {
-		return em.createQuery("From Transaction t where t.compte.numeroCompte=:numCompte").setParameter("numCompte", numCompte).getResultList();	
+		return em.createQuery("From Transaction  where numero_compte=:numCompte").setParameter("numCompte", numCompte).getResultList();	
 	}
 
 }

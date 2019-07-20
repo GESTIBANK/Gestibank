@@ -7,6 +7,8 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.wha.spring.model.enums.TypeRequest;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,8 +49,9 @@ public class Transaction {
 	@JoinColumn(name="numero_compte")
     private Compte compte;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="typeMvt")
-	private String typeMvt;
+	private TypeTransaction typeMvt;
 	
 	@Column(name="montant")
 	private int montant;
@@ -59,7 +64,7 @@ public class Transaction {
 	//private Transaction typeTransaction;
 	
 	@Builder
-	public Transaction(int montant, Date date, String typeMvt) {
+	public Transaction(int montant, Date date, TypeTransaction typeMvt) {
 		super();
 		
 		this.montant = montant;

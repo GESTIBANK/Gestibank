@@ -178,7 +178,6 @@ public class UserController {
 		}
 	
 
-	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping( "admin/conseiller/{id}/affectationClient")
 	public String affectationConseillerClient(@RequestBody List<Client> clientList, @PathVariable("id") int id) {
@@ -274,8 +273,6 @@ public class UserController {
 
 //******************************Conseiller*********************************************	
 
-	
-
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "conseiller/demandeOuverture/{id}/validation")
 	public void validationDemandeOuverture(@PathVariable("id") int id) {
@@ -285,7 +282,6 @@ public class UserController {
 
 	}
 
-	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "conseiller/DemandeOuverture/{id}/validation")
 	public Client validationDemandeOuverture(@RequestBody DemandeOuverture demandeOuverture, @PathVariable("id")int id) {
@@ -299,14 +295,13 @@ public class UserController {
 		List<Client> resultat = clientService.findAllClients();
 		return new ResponseEntity<List<Client>>(resultat, HttpStatus.OK);
 	}
-	
-	
+		
 	@CrossOrigin(origins = "http://localhost:4200")
-    @RequestMapping(value = "conseiller/client/compte/{numCompte}/transaction", method = RequestMethod.GET)
-    public ResponseEntity<List<Transaction>> getTransactionByCompteId(@PathVariable("numCompte") int numCompte) {
+    @RequestMapping(value = "client/compte/{numCompte}/transaction", method = RequestMethod.GET)
+    public List<Transaction> getTransactionByCompteId(@PathVariable("numCompte") int numCompte) {
         
-        List<Transaction> resultat = transactionService.getTransactionByCompte(numCompte);
-        return new ResponseEntity<List<Transaction>>(resultat, HttpStatus.OK);
+       return (List<Transaction>) transactionService.getTransactionByCompte(numCompte);
+       // return new ResponseEntity<List<Transaction>>(resultat, HttpStatus.OK);
     }
 @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = "conseiller/compte/{compteId}/solde", method = RequestMethod.GET)
@@ -337,10 +332,6 @@ public class UserController {
 		return demandeClient;
 
 	}
-
-	
-	
-	
 	
 //*************************Service pour la creation des entity**********************
 // { "nom":"pascal", "prenome":"frerebeau", "email":"pascal@lyon.com","adresse":"adress1", "mdp":"mdp1", "pseudo":"pseudo1", "telephone":"0151515151511","identifiant":???}

@@ -24,6 +24,8 @@ public class Credit extends Transaction{
 
 	@Column( nullable=true)
 	private int montant;
+	@Column( nullable=false)
+	private String type="Credit";
 	@Column( nullable=true)
 	private Date dateMvt= new Date();
 	@Column( nullable=true)

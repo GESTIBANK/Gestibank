@@ -26,6 +26,8 @@ public class Debit extends Transaction {
 	
 	@Column( nullable=true)
 	private int montant;
+	@Column( nullable=false)
+	private String type="Debit";
 	@Column( nullable=true)
 	private Date dateMvt= new Date();
 	@Column( nullable=true)

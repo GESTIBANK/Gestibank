@@ -146,7 +146,7 @@ public class UserController {
 
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping( "admin/conseiller/{id}/affectationDemande")
 	public void affectationConseillerDemande(@RequestBody List<DemandeOuverture> demandeOuvertureList,
 			@PathVariable("id") int id) {

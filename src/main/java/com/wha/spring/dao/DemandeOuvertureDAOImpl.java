@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wha.spring.idao.DemandeOuvertureDAO;
+import com.wha.spring.model.ClientPotentiel;
+import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.DemandeOuverture;
 import com.wha.spring.model.User;
 
@@ -34,6 +36,13 @@ public class DemandeOuvertureDAOImpl extends AbstractDao implements DemandeOuver
 	@Override
 	public List<DemandeOuverture> getDemandeOuvertureNonTraitees() {
 		return em.createQuery("From DemandeOuverture do where do.aTraiter = false").getResultList();
+	}
+	
+	@Override
+	public List<ClientPotentiel> getDemandeOuvertureATraitees(Conseiller conseiller) {
+		return (List<ClientPotentiel>) em.createQuery("Select c From ClientPotentiel c JOIN c.demandeOuverture  do  where do.aTraiter = true and do.conseiller=?1 " )
+				.setParameter(1,conseiller)
+				.getResultList();
 	}
 	
 	@Override

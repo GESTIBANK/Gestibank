@@ -131,10 +131,18 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/admin/demandeOuverture", method = RequestMethod.GET)
-	public ResponseEntity<List<DemandeOuverture>> getDemandeOuverture() {
+	public ResponseEntity<List<DemandeOuverture>> getDemandeOuvertureAdmin() {
 
 		return new ResponseEntity<List<DemandeOuverture>>(demandeOuvertureDAO.getDemandeOuvertureNonTraitees(),
 				HttpStatus.OK);
+
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/conseiller/{id}/demandeOuverture", method = RequestMethod.GET)
+	public List<ClientPotentiel> getDemandeOuvertureConseiller(@PathVariable("id")int id) {
+
+		return (List<ClientPotentiel>)demandeOuvertureDAO.getDemandeOuvertureATraitees(conseillerService.findById(id));
 
 	}
 	
@@ -146,7 +154,7 @@ public class UserController {
 
 	}
 
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping( "admin/conseiller/{id}/affectationDemande")
 	public void affectationConseillerDemande(@RequestBody List<DemandeOuverture> demandeOuvertureList,
 			@PathVariable("id") int id) {

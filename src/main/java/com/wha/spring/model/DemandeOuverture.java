@@ -35,8 +35,8 @@ public class DemandeOuverture implements Serializable{
 	
 	@Column()
 	private boolean aTraiter=false;
-	
-	boolean valide;
+	@Column()
+	boolean valide=false;
 	@ManyToOne()
 	private Admin admin;
 	

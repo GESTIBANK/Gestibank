@@ -11,6 +11,7 @@ import com.wha.spring.idao.ClientDao;
 import com.wha.spring.iservice.ClientIService;
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Compte;
+import com.wha.spring.model.Conseiller;
 
 @Service("clientIService")
 @Transactional
@@ -44,6 +45,11 @@ public class ClientIServiceImpl implements ClientIService {
 	public void updateClient(Client client) {
 		
 		clientDao.updateClient(client);
+	}
+
+	@Override
+	public Conseiller getConseillerByClient(int id) {
+		return clientDao.findByIdentifiant(id).getConseiller();
 	}
 
 

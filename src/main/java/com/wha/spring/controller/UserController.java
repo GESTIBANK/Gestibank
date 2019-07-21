@@ -163,7 +163,7 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("admin/conseiller/{id}")
+	@DeleteMapping("admin/conseiller/{id}/delete")
 	public String suppressionConseiller(@PathVariable("id") int id) {
 		try {
 			adminService.supprimerConseiller((Conseiller) conseillerDao.findById(id));
@@ -216,7 +216,12 @@ public class UserController {
 				
 		return compteService.findCompteByClient(id);
 	}
-
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "client/{id}/conseiller", method = RequestMethod.GET)
+	public Conseiller getConseillerByClient(@PathVariable("id")int id) {
+				
+		return clientService.getConseillerByClient(id);
+	}
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("client/compte/demandeOuverture")
 	public DemandeOuverture demandeOuvertureCompte(@RequestBody ClientPotentiel clientp) {
@@ -282,7 +287,7 @@ public class UserController {
 //******************************Conseiller*********************************************	
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value = "conseiller/demandeOuverture/{id}/validation")
+	@RequestMapping(value = "conseiller/demandeOuverture/{id}/validation",  method = RequestMethod.GET)
 	public void validationDemandeOuverture(@PathVariable("id") int id) {
 		
 		//System.out.println(conseillerService.validationDemandeOuverture(demandeOuvertureDAO.findById(id)));
@@ -293,7 +298,8 @@ public class UserController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "conseiller/DemandeOuverture/{id}/validation")
 	public Client validationDemandeOuverture(@RequestBody DemandeOuverture demandeOuverture, @PathVariable("id")int id) {
-		return clientDao.creationClient(conseillerService.validationDemandeOuverture(demandeOuvertureService.findById(id)));
+		  
+		return  clientService.creationClient(conseillerService.validationDemandeOuverture(demandeOuvertureService.findById(id)));
 
 	}
 	@CrossOrigin(origins = "http://localhost:4200")

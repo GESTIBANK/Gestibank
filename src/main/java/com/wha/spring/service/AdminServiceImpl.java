@@ -51,7 +51,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void supprimerConseiller(Conseiller conseiller) {
 		
-		conseillerDAO.deleteUser(conseiller.getId());
+		conseillerDAO.deleteConseiller(conseiller.getId());
 		
 	}
 	@Override

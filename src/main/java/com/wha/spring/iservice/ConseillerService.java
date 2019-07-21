@@ -24,5 +24,6 @@ public interface ConseillerService {
 	void setClientList(List<Client> client);
 	Conseiller findById(int id);
 	List<Conseiller> findAll();
+	
 
 }

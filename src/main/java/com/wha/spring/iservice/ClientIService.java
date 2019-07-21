@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.wha.spring.model.Client;
 import com.wha.spring.model.Compte;
+import com.wha.spring.model.Conseiller;
 import com.wha.spring.model.User;
 
 public interface ClientIService {
@@ -20,7 +21,7 @@ public interface ClientIService {
 	
 	void updateClient(Client client);
 	
-	
+	Conseiller getConseillerByClient(int id);
 
 	
 }

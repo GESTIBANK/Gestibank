@@ -22,7 +22,7 @@ public class AdminDaoImpl extends AbstractDao implements AdminDao {
 
 	@Override
 	public void creationConseiller(Conseiller conseiller) {
-		em.persist(conseiller);
+		em.persist(conseiller) ;
 		
 	}
 

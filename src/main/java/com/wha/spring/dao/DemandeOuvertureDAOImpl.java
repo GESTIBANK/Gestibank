@@ -40,7 +40,7 @@ public class DemandeOuvertureDAOImpl extends AbstractDao implements DemandeOuver
 	
 	@Override
 	public List<ClientPotentiel> getDemandeOuvertureATraitees(Conseiller conseiller) {
-		return (List<ClientPotentiel>) em.createQuery("Select c From ClientPotentiel c JOIN c.demandeOuverture  do  where do.aTraiter = true and do.conseiller=?1 " )
+		return (List<ClientPotentiel>) em.createQuery("Select c From ClientPotentiel c JOIN c.demandeOuverture  do  where do.aTraiter = true and do.conseiller=?1 and do.valide= false" )
 				.setParameter(1,conseiller)
 				.getResultList();
 	}

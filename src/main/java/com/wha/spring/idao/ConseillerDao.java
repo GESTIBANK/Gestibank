@@ -24,7 +24,7 @@ Compte aficherDetailCompte(Compte compte);
 Client afficherDetailClient(Client client);
  User findById(int id);
  List<Conseiller>  findAll();
- void deleteUser(int id);
+ void deleteConseiller(int id);
  void update(Conseiller conseiller);
 
 }

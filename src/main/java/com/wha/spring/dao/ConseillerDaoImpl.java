@@ -74,7 +74,7 @@ public class ConseillerDaoImpl extends AbstractDao implements ConseillerDao{
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteConseiller(int id) {
 		em.remove(findById(id));
 		
 	}

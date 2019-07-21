@@ -53,7 +53,7 @@ public class ConseillerServiceImpl implements ConseillerService{
 		
 		demandeOuverture.setValide(true);
 		//Compte compte = new Compte();
-		Client client= new Client(0, demandeOuverture.getClientPotentiel().getNom(), demandeOuverture.getClientPotentiel().getPrenom(), demandeOuverture.getClientPotentiel().getEmail(), "", "", "", "");
+		Client client= new Client(0, demandeOuverture.getClientPotentiel().getNom(), demandeOuverture.getClientPotentiel().getPrenom(), demandeOuverture.getClientPotentiel().getEmail(),"pseeudo", "mdp", "", "");
 		demandeOuvertureDao.updateDemandeOuverture(demandeOuverture);
 		clientDao.creationClient(client);
 		

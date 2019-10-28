@@ -1,0 +1,3 @@
+INSERT INTO public.project
+(id, natural_id, client_natural_id, "type", status, public_documents_path, private_documents_path, "version", contact_natural_id, title, description, nb_bonding, success_rate, component_material_natural_id, adhesive_shape_natural_id, substrate_natural_id, program_category_natural_id, substrate_details, adhesive_ref, machine_supplier, component_supplier)
+VALUES('7g07df17-2268-4883-9af0-f5bc8e4e88e6', 'M003', '2337471849', 'PROGRAM', 'IN_PROGRESS', '', '', 0, '301', 'Project title', 'Project description', 3000, 20, 'component_material_1', 'adhesive_shape_2', 'substrate_2', 'program_category_1', 'some value', 'some value', 'some value', 'some value');
